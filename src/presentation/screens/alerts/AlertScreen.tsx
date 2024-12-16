@@ -1,13 +1,18 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useContext } from 'react';
 import {CustomView} from '../../components/ui/CustomView';
 import {Title} from '../../components/ui/Title';
 import {globalStyles} from '../../../config/theme/theme';
 import {Button} from '../../components/ui/Button';
 import {Alert, View} from 'react-native';
 import { showPrompt } from '../../../config/adapters/prompt.adapter';
+import { ThemeContext } from '../../context/ThemeContext';
 export const AlertScreen = () => {
-  const createTwoButtonAlert = () =>
+
+  const {isDark} = useContext(ThemeContext);
+
+  const createTwoButtonAlert = () => {
+
     Alert.alert('Alert Title', 'My Alert Msg', [
       {
         text: 'Cancel',
@@ -15,7 +20,12 @@ export const AlertScreen = () => {
         style: 'cancel',
       },
       {text: 'OK', onPress: () => console.log('OK Pressed')},
-    ]);
+    ],
+    {
+      userInterfaceStyle: isDark ? 'dark' : 'light',
+    }
+  );
+  };
 
   const createThreeButtonAlert = () =>
     Alert.alert(
@@ -38,6 +48,7 @@ export const AlertScreen = () => {
         onDismiss() {
           console.log('onDismiss');
         },
+        userInterfaceStyle: isDark ? 'dark' : 'light',
       },
     );
 

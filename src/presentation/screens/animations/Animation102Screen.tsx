@@ -1,10 +1,9 @@
-import React, { useRef } from 'react';
-import { Animated, PanResponder, SafeAreaView, StyleSheet } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React, {useRef} from 'react';
+import {Animated, PanResponder, StyleSheet} from 'react-native';
+import {CustomView} from '../../components/ui/CustomView';
 
 export const Animation102Screen = () => {
-
-    const pan = useRef(new Animated.ValueXY()).current;
+  const pan = useRef(new Animated.ValueXY()).current;
 
   const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
@@ -24,27 +23,25 @@ export const Animation102Screen = () => {
   });
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        <Animated.View
-          {...panResponder.panHandlers}
-          style={[pan.getLayout(), styles.box]}
-        />
-      </SafeAreaView>
-    </SafeAreaProvider>
+    <CustomView style={ styles.container}>
+      <Animated.View
+        {...panResponder.panHandlers}
+        style={[pan.getLayout(), styles.box]}
+      />
+    </CustomView>
   );
 };
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    box: {
-      backgroundColor: '#61dafb',
-      width: 80,
-      height: 80,
-      borderRadius: 4,
-    },
-  });
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  box: {
+    backgroundColor: '#61dafb',
+    width: 80,
+    height: 80,
+    borderRadius: 4,
+  },
+});
